@@ -991,7 +991,7 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 
 - 类型：Function
 - 默认值：null
-- 作用：列标题单元格渲染前触发，`return false` 则不渲染列标题
+- 作用：列标题单元格渲染前触发，`return false` 则不渲染列标题（只是不会绘制内容）
 - 参数：
 	- {Object} [columnAbc]:列标题字符
 	- {Object} [position]:

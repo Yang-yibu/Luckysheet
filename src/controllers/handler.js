@@ -191,6 +191,13 @@ export default function luckysheetHandler() {
         let rowscroll = 0;
 
         let scrollNum = event.deltaFactor < 40 ? 1 : event.deltaFactor < 80 ? 2 : 3;
+        if (event.shiftKey) {
+            if (event.deltaY != 0) {
+                event.deltaX = event.deltaY
+                event.deltaY = 0
+            }
+        }
+
         //一次滚动三行或三列
         if (event.deltaY != 0) {
             let row_ed,

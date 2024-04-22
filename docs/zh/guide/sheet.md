@@ -365,7 +365,7 @@ options.data示例如下：
 - 默认值：{}
 - 作用：工作表保护，可以设置当前整个工作表不允许编辑或者部分区域不可编辑，如果要申请编辑权限需要输入密码，自定义配置用户可以操作的类型等。
 - 示例：
-    ```js        
+    ```js
     "authority":{//当前工作表的权限配置
         selectLockedCells:1, //选定锁定单元格
         selectunLockedCells:1, //选定解除锁定的单元格
@@ -381,7 +381,8 @@ options.data示例如下：
         filter:1, //使用自动筛选
         usePivotTablereports:1, //使用数据透视表和报表
         editObjects:1, //编辑对象
-        editScenarios:1, //编辑方案    
+        editScenarios:1, //编辑方案，功能还未完成
+
         sheet:1, //如果为1或true，则该工作表受到保护；如果为0或false，则该工作表不受保护。
         hintText:"", //弹窗提示的文字
         algorithmName:"None",//加密方案：MD2,MD4,MD5,RIPEMD-128,RIPEMD-160,SHA-1,SHA-256,SHA-384,SHA-512,WHIRLPOOL
@@ -390,13 +391,15 @@ options.data示例如下：
         allowRangeList:[{ //区域保护
             name:"area", //名称
             password:"1", //密码
-            hintText:"", //提示文字
+            hintText:"", //设置密码后的提示文字
             algorithmName:"None",//加密方案：MD2,MD4,MD5,RIPEMD-128,RIPEMD-160,SHA-1,SHA-256,SHA-384,SHA-512,WHIRLPOOL
             saltValue:null, //密码解密的盐参数，为一个自己定的随机数值
             sqref:"$C$1:$D$5" //区域范围
         }],
     },
     ```
+
+注：工作表开启保护后，用户允许的操作权限，默认全部开启；编辑权限由 cell.lo 锁定状态控制
 
 ------------
 ### scrollLeft

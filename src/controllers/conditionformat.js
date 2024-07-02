@@ -2251,7 +2251,9 @@ const conditionformat = {
             }
 
             $("#luckysheet-editorConditionRule-dialog #textcolorshow").spectrum("set", ruleFormat.textColor);
+            $("#luckysheet-editorConditionRule-dialog #checkTextColor").attr("checked", !!ruleFormat.textColor);
             $("#luckysheet-editorConditionRule-dialog #cellcolorshow").spectrum("set", ruleFormat.cellColor);
+            $("#luckysheet-editorConditionRule-dialog #checkCellColor").attr("checked", !!ruleFormat.cellColor);
         }
     },
     infoDialog: function(title, content){

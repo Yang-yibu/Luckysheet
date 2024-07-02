@@ -3829,7 +3829,7 @@ const conditionformat = {
                                         func = "=" + formula.functionCopy(func, "right", offsetCol);
                                     }
 
-                                    let funcV = formula.execfunction(func);
+                                    let funcV = formula.execfunction(func, r, c);
                                     let v = funcV[1];
 
                                     if(typeof v != 'boolean'){

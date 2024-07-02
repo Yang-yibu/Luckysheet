@@ -807,7 +807,7 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 
 - 类型：Function
 - 默认值：null
-- 作用：进入单元格编辑模式之前触发。在选中了某个单元格且在非编辑状态下，通常有以下三种常规方法触发进入编辑模式
+- 作用：进入单元格编辑模式之前触发。`return false` 则不执行进入编辑；在选中了某个单元格且在非编辑状态下，通常有以下三种常规方法触发进入编辑模式
 	   
   - 双击单元格
   - 敲Enter键
@@ -856,6 +856,7 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 		+ {Number} [start_c]:单元格左上角的水平坐标
 		+ {Number} [end_r]:单元格右下角的垂直坐标
 		+ {Number} [end_c]:单元格右下角的水平坐标
+		+ {{r,c,x,y,w,h}} [cellsize]:单元格有 1px 内间距的尺寸
 	- {Object} [sheet]:当前sheet对象
 	- {Object} [ctx]: 当前画布的context
 
@@ -874,6 +875,7 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 		+ {Number} [start_c]:单元格左上角的水平坐标
 		+ {Number} [end_r]:单元格右下角的垂直坐标
 		+ {Number} [end_c]:单元格右下角的水平坐标
+		+ {{r,c,x,y,w,h}} [cellsize]:单元格有 1px 内间距的尺寸
 	- {Object} [sheet]:当前sheet对象
 	- {Object} [ctx]: 当前画布的context
 

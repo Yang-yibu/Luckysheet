@@ -18,6 +18,9 @@ luckysheet.transToCellData(data)
 luckysheet.transToData(celldata)
 ```
 
+备注：
+- 调用 toJson 获得的数据，才有 celldata 属性
+
 ------------
 
 ## 单元格的类型有哪些？

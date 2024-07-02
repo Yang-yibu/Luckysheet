@@ -3842,13 +3842,7 @@ const conditionformat = {
                                         continue;
                                     }
 
-                                    if((r + "_" + c) in computeMap){
-                                        computeMap[r + "_" + c]["textColor"] = textColor;
-                                        computeMap[r + "_" + c]["cellColor"] = cellColor;
-                                    }
-                                    else{
-                                        computeMap[r + "_" + c] = { "textColor": textColor, "cellColor": cellColor };
-                                    }
+                                    _this.setComputeMap(r, c, computeMap, { "textColor": textColor, "cellColor": cellColor })
                                 }
                             }
                         }
@@ -3860,6 +3854,42 @@ const conditionformat = {
         Store.conditionFormatCells = computeMap;
 
         return computeMap;
+    },
+    setComputeMap: function (r, c, computeMap, cmtMap = {}, conf = {}) {
+        const { isMerge = true, isNullSkip = true } = conf;
+        if((r + "_" + c) in computeMap){
+            if (isMerge) {
+                Object.keys(cmtMap).map(k => {
+                    var v = cmtMap[k];
+                    if (isNullSkip) {
+                        (v !== null && v !== undefined) && (computeMap[r + "_" + c][k] = v)
+                    } else {
+                        computeMap[r + "_" + c][k] = v
+                    }
+                })
+            } else {
+                computeMap[r + "_" + c] = cmtMap;
+            }
+        }
+        else{
+            computeMap[r + "_" + c] = cmtMap;
+        }
+
+        // if((r + "_" + c) in computeMap){
+        //     computeMap[r + "_" + c]["textColor"] = cmtMap.textColor;
+        //     computeMap[r + "_" + c]["cellColor"] = cmtMap.cellColor;
+        // }
+        // else{
+        //     computeMap[r + "_" + c] = { "textColor": cmtMap.textColor, "cellColor": cmtMap.cellColor };
+        // }
+
+        // if((r + "_" + c) in computeMap){
+        //     computeMap[r + "_" + c]["textColor"] = textColor;
+        //     computeMap[r + "_" + c]["cellColor"] = cellColor;
+        // }
+        // else{
+        //     computeMap[r + "_" + c] = { "textColor": textColor, "cellColor": cellColor };
+        // }
     },
     updateItem: function(type, cellrange, format){
         if(!checkProtectionFormatCells(Store.currentSheetIndex)){

@@ -1266,12 +1266,23 @@ let nullCellRender = function(
 
     // 这里计算canvas需要绘制的矩形范围时,需要留下原本单元格边框的位置
     // 让 fillRect 绘制矩形的起始xy坐标增加1,绘制长宽减少1
+    let _cellsize = {
+        r: r,
+        c: c,
+        x: start_c + offsetLeft + borderfix[0] + 1,
+        y: start_r + offsetTop + borderfix[1] + 1,
+        // w: end_c - start_c + borderfix[2] - (!!isMerge ? 1 : 0) - 1,
+        w: end_c - start_c + borderfix[2] - (!!isMerge ? 3 : 2) - 1,
+        h: end_r - start_r + borderfix[3] - 1,
+        // h: end_r - start_r + borderfix[3] + 1,
+    }
 
+    /** @type {[x: number, y: number, w: number, h: number]} */
     let cellsize = [
-        start_c + offsetLeft + borderfix[0] + 1,
-        start_r + offsetTop + borderfix[1] + 1,
-        end_c - start_c + borderfix[2] - (!!isMerge ? 1 : 0) - 1,
-        end_r - start_r + borderfix[3] - 1,
+        _cellsize.x,
+        _cellsize.y,
+        _cellsize.w,
+        _cellsize.h,
     ];
 
     //单元格渲染前，考虑到合并单元格会再次渲染一遍，统一放到这里
@@ -1286,6 +1297,7 @@ let nullCellRender = function(
                 start_c: cellsize[0],
                 end_r: cellsize[3] + cellsize[1],
                 end_c: cellsize[2] + cellsize[0],
+                cellsize: _cellsize
             },
             sheetmanage.getSheetByIndex(),
             luckysheetTableContent,
@@ -1320,9 +1332,12 @@ let nullCellRender = function(
         let ps_w = 8 * Store.zoomRatio,
             ps_h = 8 * Store.zoomRatio;
         luckysheetTableContent.beginPath();
-        luckysheetTableContent.moveTo(end_c + offsetLeft - 1 - ps_w, start_r + offsetTop);
-        luckysheetTableContent.lineTo(end_c + offsetLeft - 1, start_r + offsetTop);
-        luckysheetTableContent.lineTo(end_c + offsetLeft - 1, start_r + offsetTop + ps_h);
+        luckysheetTableContent.moveTo(_cellsize.x + _cellsize.w - ps_w, _cellsize.y);
+        luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w, _cellsize.y);
+        luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w, _cellsize.y + ps_h);
+        // luckysheetTableContent.moveTo(end_c + offsetLeft - 1 - ps_w, start_r + offsetTop);
+        // luckysheetTableContent.lineTo(end_c + offsetLeft - 1, start_r + offsetTop);
+        // luckysheetTableContent.lineTo(end_c + offsetLeft - 1, start_r + offsetTop + ps_h);
         luckysheetTableContent.fillStyle = "#FC6666";
         luckysheetTableContent.fill();
         luckysheetTableContent.closePath();
@@ -1388,6 +1403,7 @@ let nullCellRender = function(
             start_c: cellsize[0],
             end_r: cellsize[3] + cellsize[1],
             end_c: cellsize[2] + cellsize[0],
+            cellsize: _cellsize
         },
         sheetmanage.getSheetByIndex(),
         luckysheetTableContent,
@@ -1454,11 +1470,25 @@ let cellRender = function(
     // 这里计算canvas需要绘制的矩形范围时,需要留下原本单元格边框的位置
     // 让 fillRect 绘制矩形的起始xy坐标增加1,绘制长宽减少1
 
+    // x,y,w,h 是单元格有 1px 的内间距尺寸
+    let _cellsize = {
+        r: r,
+        c: c,
+        x: start_c + offsetLeft + borderfix[0] + 1,
+        y: start_r + offsetTop + borderfix[1] + 1,
+        // w: end_c - start_c + borderfix[2] - (!!isMerge ? 1 : 0) - 1,
+        w: end_c - start_c + borderfix[2] - (!!isMerge ? 3 : 2) - 1,
+        // fix: 有文字时，背景色会超出显示
+        h: end_r - start_r + borderfix[3] - 1,
+        // h: end_r - start_r + borderfix[3] + 1,
+    }
+
+    /** @type {[x: number, y: number, w: number, h: number]} */
     let cellsize = [
-        start_c + offsetLeft + borderfix[0] + 1,
-        start_r + offsetTop + borderfix[1] + 1,
-        end_c - start_c + borderfix[2] - (!!isMerge ? 1 : 0) - 1,
-        end_r - start_r + borderfix[3] + 1,
+        _cellsize.x,
+        _cellsize.y,
+        _cellsize.w,
+        _cellsize.h,
     ];
 
     //单元格渲染前，考虑到合并单元格会再次渲染一遍，统一放到这里
@@ -1473,6 +1503,7 @@ let cellRender = function(
                 start_c: cellsize[0],
                 end_r: cellsize[3] + cellsize[1],
                 end_c: cellsize[2] + cellsize[0],
+                cellsize: _cellsize
             },
             sheetmanage.getSheetByIndex(),
             luckysheetTableContent,
@@ -1495,9 +1526,12 @@ let cellRender = function(
             dv_h = 5 * Store.zoomRatio; //红色小三角宽高
 
         luckysheetTableContent.beginPath();
-        luckysheetTableContent.moveTo(start_c + offsetLeft, start_r + offsetTop);
-        luckysheetTableContent.lineTo(start_c + offsetLeft + dv_w, start_r + offsetTop);
-        luckysheetTableContent.lineTo(start_c + offsetLeft, start_r + offsetTop + dv_h);
+        luckysheetTableContent.moveTo(_cellsize.x, _cellsize.y);
+        luckysheetTableContent.lineTo(_cellsize.x + dv_w, _cellsize.y);
+        luckysheetTableContent.lineTo(_cellsize.x, _cellsize.y + dv_h);
+        // luckysheetTableContent.moveTo(start_c + offsetLeft, start_r + offsetTop);
+        // luckysheetTableContent.lineTo(start_c + offsetLeft + dv_w, start_r + offsetTop);
+        // luckysheetTableContent.lineTo(start_c + offsetLeft, start_r + offsetTop + dv_h);
         luckysheetTableContent.fillStyle = "#FC6666";
         luckysheetTableContent.fill();
         luckysheetTableContent.closePath();
@@ -1509,23 +1543,30 @@ let cellRender = function(
             ps_h = 8 * Store.zoomRatio; //红色小三角宽高
 
         luckysheetTableContent.beginPath();
-        luckysheetTableContent.moveTo(end_c + offsetLeft - ps_w, start_r + offsetTop);
-        luckysheetTableContent.lineTo(end_c + offsetLeft, start_r + offsetTop);
-        luckysheetTableContent.lineTo(end_c + offsetLeft, start_r + offsetTop + ps_h);
+        luckysheetTableContent.moveTo(_cellsize.x + _cellsize.w - ps_w, _cellsize.y)
+        luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w, _cellsize.y)
+        luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w, _cellsize.y + ps_h)
+
+        // luckysheetTableContent.moveTo(end_c + offsetLeft - ps_w, start_r + offsetTop);
+        // luckysheetTableContent.lineTo(end_c + offsetLeft, start_r + offsetTop);
+        // luckysheetTableContent.lineTo(end_c + offsetLeft, start_r + offsetTop + ps_h);
         luckysheetTableContent.fillStyle = "#FC6666";
         luckysheetTableContent.fill();
         luckysheetTableContent.closePath();
     }
 
-    //若单元格强制为字符串，则显示绿色小三角
+    //若单元格强制为字符串，则显示绿色小三角 - 左上角
     if (cell.qp == 1 && isRealNum(cell.v)) {
         let ps_w = 6 * Store.zoomRatio,
             ps_h = 6 * Store.zoomRatio; //红色小三角宽高
 
         luckysheetTableContent.beginPath();
-        luckysheetTableContent.moveTo(start_c + offsetLeft + ps_w - 1, start_r + offsetTop);
-        luckysheetTableContent.lineTo(start_c + offsetLeft - 1, start_r + offsetTop);
-        luckysheetTableContent.lineTo(start_c + offsetLeft - 1, start_r + offsetTop + ps_h);
+        luckysheetTableContent.moveTo(_cellsize.x - 1 + ps_w, _cellsize.y - 1);
+        luckysheetTableContent.lineTo(_cellsize.x - 1, _cellsize.y-1);
+        luckysheetTableContent.lineTo(_cellsize.x - 1, _cellsize.y-1 + ps_h);
+        // luckysheetTableContent.moveTo(start_c + offsetLeft + ps_w - 1, start_r + offsetTop);
+        // luckysheetTableContent.lineTo(start_c + offsetLeft - 1, start_r + offsetTop);
+        // luckysheetTableContent.lineTo(start_c + offsetLeft - 1, start_r + offsetTop + ps_h);
         luckysheetTableContent.fillStyle = "#487f1e";
         luckysheetTableContent.fill();
         luckysheetTableContent.closePath();
@@ -1860,6 +1901,7 @@ let cellRender = function(
             start_c: cellsize[0],
             end_r: cellsize[3] + cellsize[1],
             end_c: cellsize[2] + cellsize[0],
+            cellsize: _cellsize
         },
         sheetmanage.getSheetByIndex(),
         luckysheetTableContent,

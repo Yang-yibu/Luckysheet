@@ -6562,7 +6562,41 @@ window.sheetConditionFormat = {
 			"column_focus": 8
 		}],
 		"format": ["rgb(248, 105, 107)", "rgb(255, 235, 132)", "rgb(99, 190, 123)"]
-	}]
+	},{
+    type: "default",
+    cellrange: [
+      {
+        row: [0, 4],
+        column: [14, 16],
+        sheetIndex: "2",
+      },
+    ],
+    format: {
+      textColor: null,
+      cellColor: "#ea9999",
+    },
+    conditionName: "formula",
+    conditionRange: [],
+    conditionValue: ["=ISODD(ROW()+COLUMN()+$R1)"],
+  },
+  {
+    type: "default",
+    cellrange: [
+      {
+        row: [0, 4],
+        column: [14, 16],
+        sheetIndex: "2",
+      },
+    ],
+    format: {
+      textColor: "#38761d",
+      cellColor: null,
+    },
+    conditionName: "formula",
+    conditionRange: [],
+    // conditionValue: ["=$R1=1"],
+    conditionValue: ["=ISODD(ROW()+COLUMN()+$R1)"],
+  }]
 }
 
 // export default sheetConditionFormat;

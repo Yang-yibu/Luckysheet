@@ -71,6 +71,12 @@ function setcellvalue(r, c, d, v) {
         cell.ct = { fa: "@", t: "s" };
         cell.v = vupdateStr.substr(1);
         cell.qp = 1;
+    } else if (vupdateStr.substr(0, 1) == '"') {
+        cell.m = vupdateStr.substr(1);
+        cell.ct = { fa: "@", t: "s" };
+        cell.v = vupdateStr.substr(1);
+        cell.qp = 1;
+        cell.qptri = 1
     } else if (cell.qp == 1) {
         cell.m = vupdateStr;
         cell.ct = { fa: "@", t: "s" };

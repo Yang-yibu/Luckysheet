@@ -1556,7 +1556,7 @@ let cellRender = function(
     }
 
     //若单元格强制为字符串，则显示绿色小三角 - 左上角
-    if (cell.qp == 1 && isRealNum(cell.v)) {
+    if (cell.qp == 1 && isRealNum(cell.v) && cell.qptri != 1) {
         let ps_w = 6 * Store.zoomRatio,
             ps_h = 6 * Store.zoomRatio; //红色小三角宽高
 

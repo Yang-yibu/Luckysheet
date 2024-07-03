@@ -8,6 +8,8 @@ if (window.addEventListener && (navigator.userAgent.indexOf("Firefox") > 0)) {
     __firefox();
 }
 
+var version = require('../package.json').version
+luckysheet.version = version
 // export default luckysheet;
 // use esbuild,bundle iife format
 module.exports = luckysheet

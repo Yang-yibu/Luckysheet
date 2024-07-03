@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.15-0](///compare/v2.1.14...v2.1.15-0) (2024-07-03)
+
+
+### Bug Fixes
+
+* 修复条件格式选择使用公式设置单元格时，公式计算错误问题 3b454d1
+* **celldraw:** 单元格绘制 角标尺寸、绘制尺寸调整 deca5f6
+* **celldraw:** 单元格绘制，扩展数字强制显示未字符串，不显示绿色角标 71f3e36
+* **celldraw:** 单元格绘制，有文字时下边超出一小块&调整绘制角标尺寸 3bb715a
+* **conditionformat:** 条件格式颜色未选择回显不正确 5d7df58
+* **conditionformat:** 条件格式中配置了公式，对应单元格可能没有公式，导致单元格聚焦不了问题 556e637
+* **conditionformat:** 优化条件格式设置-背景或文字颜色未选择时，格式显示问题 e2d591e
+* **conditionformat:** demo 添加公式类型示例条件格式 16b0573
+
 ### [2.1.13](https://github.com/mengshukeji/Luckysheet/compare/v2.1.12...v2.1.13) (2021-01-19)
 
 

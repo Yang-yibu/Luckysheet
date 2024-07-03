@@ -1272,8 +1272,8 @@ let nullCellRender = function(
         x: start_c + offsetLeft + borderfix[0] + 1,
         y: start_r + offsetTop + borderfix[1] + 1,
         // w: end_c - start_c + borderfix[2] - (!!isMerge ? 1 : 0) - 1,
-        w: end_c - start_c + borderfix[2] - (!!isMerge ? 3 : 2) - 1,
-        h: end_r - start_r + borderfix[3] - 1,
+        w: end_c - start_c + borderfix[2] - (!!isMerge ? 2 : 2) - 1,
+        h: end_r - start_r + borderfix[3] - (2) - 1,
         // h: end_r - start_r + borderfix[3] + 1,
     }
 
@@ -1306,7 +1306,7 @@ let nullCellRender = function(
         return;
     }
 
-    luckysheetTableContent.fillRect(cellsize[0], cellsize[1], cellsize[2], cellsize[3]);
+    luckysheetTableContent.fillRect(cellsize[0], cellsize[1], cellsize[2] + 1, cellsize[3] + 1);
 
     if (r + "_" + c in dynamicArray_compute) {
         let value = dynamicArray_compute[r + "_" + c].v;
@@ -1471,15 +1471,16 @@ let cellRender = function(
     // 让 fillRect 绘制矩形的起始xy坐标增加1,绘制长宽减少1
 
     // x,y,w,h 是单元格有 1px 的内间距尺寸
+    // TODO: 角标绘制尺寸和fillRect绘制的尺寸坐标有什么不一样（绘制角标的时候有内间距，绘制矩形的时候宽度少了）
     let _cellsize = {
         r: r,
         c: c,
         x: start_c + offsetLeft + borderfix[0] + 1,
         y: start_r + offsetTop + borderfix[1] + 1,
         // w: end_c - start_c + borderfix[2] - (!!isMerge ? 1 : 0) - 1,
-        w: end_c - start_c + borderfix[2] - (!!isMerge ? 3 : 2) - 1,
+        w: end_c - start_c + borderfix[2] - (!!isMerge ? 2 : 2) - 1,
         // fix: 有文字时，背景色会超出显示
-        h: end_r - start_r + borderfix[3] - 1,
+        h: end_r - start_r + borderfix[3] - (2) - 1,
         // h: end_r - start_r + borderfix[3] + 1,
     }
 
@@ -1512,7 +1513,7 @@ let cellRender = function(
         return;
     }
 
-    luckysheetTableContent.fillRect(cellsize[0], cellsize[1], cellsize[2], cellsize[3]);
+    luckysheetTableContent.fillRect(cellsize[0], cellsize[1], cellsize[2] + 1, cellsize[3] + 1);
 
     let dataVerification = dataVerificationCtrl.dataVerification;
 
@@ -1550,6 +1551,22 @@ let cellRender = function(
         // luckysheetTableContent.moveTo(end_c + offsetLeft - ps_w, start_r + offsetTop);
         // luckysheetTableContent.lineTo(end_c + offsetLeft, start_r + offsetTop);
         // luckysheetTableContent.lineTo(end_c + offsetLeft, start_r + offsetTop + ps_h);
+
+        // 右下
+        luckysheetTableContent.moveTo(_cellsize.x + _cellsize.w, _cellsize.y + _cellsize.h - ps_h);
+        luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w, _cellsize.y + _cellsize.h);
+        luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w - ps_w, _cellsize.y + _cellsize.h);
+
+        // 左上
+        luckysheetTableContent.moveTo(_cellsize.x, _cellsize.y);
+        luckysheetTableContent.lineTo(_cellsize.x + ps_w, _cellsize.y);
+        luckysheetTableContent.lineTo(_cellsize.x, _cellsize.y + ps_h);
+
+        // 左下
+        luckysheetTableContent.moveTo(_cellsize.x, _cellsize.y + _cellsize.h - ps_h);
+        luckysheetTableContent.lineTo(_cellsize.x + ps_w, _cellsize.y + _cellsize.h);
+        luckysheetTableContent.lineTo(_cellsize.x, _cellsize.y + _cellsize.h);
+
         luckysheetTableContent.fillStyle = "#FC6666";
         luckysheetTableContent.fill();
         luckysheetTableContent.closePath();

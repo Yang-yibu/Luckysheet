@@ -4192,6 +4192,10 @@ const menuButton = {
         jfrefreshgrid(d, Store.luckysheet_select_save, { cfg, calc, hyperlink });
         Store.clearjfundo = true;
     },
+    /**
+     * TODO: 作用是？
+     * @returns {[x: number, y: number, w: number, h: number]}
+     */
     borderfix: function(d, r, c) {
         // return [-1, -1, 2, 2];
 
@@ -4200,7 +4204,7 @@ const menuButton = {
 
         if (cell == null) {
             return [-1, 0, 0, -1];
-        } else if (d[r][c].bg == null || d[r][c].bg == "") {
+        } else if (cell.bg == null || cell.bg == "") {
             return [-1, 0, 0, -1];
         } else {
             return [-2, -1, 1, 0];

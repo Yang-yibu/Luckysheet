@@ -1547,25 +1547,9 @@ let cellRender = function(
         luckysheetTableContent.moveTo(_cellsize.x + _cellsize.w - ps_w, _cellsize.y)
         luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w, _cellsize.y)
         luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w, _cellsize.y + ps_h)
-
         // luckysheetTableContent.moveTo(end_c + offsetLeft - ps_w, start_r + offsetTop);
         // luckysheetTableContent.lineTo(end_c + offsetLeft, start_r + offsetTop);
         // luckysheetTableContent.lineTo(end_c + offsetLeft, start_r + offsetTop + ps_h);
-
-        // 右下
-        luckysheetTableContent.moveTo(_cellsize.x + _cellsize.w, _cellsize.y + _cellsize.h - ps_h);
-        luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w, _cellsize.y + _cellsize.h);
-        luckysheetTableContent.lineTo(_cellsize.x + _cellsize.w - ps_w, _cellsize.y + _cellsize.h);
-
-        // 左上
-        luckysheetTableContent.moveTo(_cellsize.x, _cellsize.y);
-        luckysheetTableContent.lineTo(_cellsize.x + ps_w, _cellsize.y);
-        luckysheetTableContent.lineTo(_cellsize.x, _cellsize.y + ps_h);
-
-        // 左下
-        luckysheetTableContent.moveTo(_cellsize.x, _cellsize.y + _cellsize.h - ps_h);
-        luckysheetTableContent.lineTo(_cellsize.x + ps_w, _cellsize.y + _cellsize.h);
-        luckysheetTableContent.lineTo(_cellsize.x, _cellsize.y + _cellsize.h);
 
         luckysheetTableContent.fillStyle = "#FC6666";
         luckysheetTableContent.fill();

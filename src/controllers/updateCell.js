@@ -4,6 +4,7 @@ import menuButton from './menuButton';
 import conditionformat from './conditionformat';
 import alternateformat from './alternateformat';
 import cellDatePickerCtrl from './cellDatePickerCtrl';
+import cellInputCtrl from './cellInputCtrl';
 import dataVerificationCtrl from './dataVerificationCtrl';
 import {checkProtectionLocked,checkProtectionCellHidden}  from './protection';
 import { chatatABC } from '../utils/util';
@@ -253,6 +254,8 @@ export function luckysheetupdateCell(row_index1, col_index1, d, cover, isnotfocu
     //日期
     if(d[row_index1][col_index1] && d[row_index1][col_index1].ct && d[row_index1][col_index1].ct.t == 'd'){
         cellDatePickerCtrl.cellFocus(row_index1, col_index1, d[row_index1][col_index1]);
+    } else {
+        cellInputCtrl.cellFocus(row_index1, col_index1, d[row_index1][col_index1]);
     }
 
     formula.rangetosheet = Store.currentSheetIndex;

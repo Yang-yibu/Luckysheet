@@ -6,12 +6,7 @@ const cellInputCtrl = {
     cellFocus: function (r, c, cell) {
         const size = getColumnAndRowSize(r, c, Store.flowdata);
 
-        method.createHookFunction(
-            "cellEditorCustom",
-            d[row_index1][col_index1],
-            size,
-            cell
-        );
+        method.createHookFunction("cellEditorCustom", cell, size);
 
         $("#luckysheet-input-box").click();
     },

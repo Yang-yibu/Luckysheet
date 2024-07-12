@@ -183,6 +183,11 @@
 						},
 						cellEditBefore: function (range) {
 							// console.info(range)
+							const cr = range[0]
+							if (cr.row_focus === 0) {
+								alert('模拟第一行不能编辑')
+								return false
+							}
 						},
 						workbookCreateAfter: function (json) {
 							console.info('workbook create after!!!!====',json)

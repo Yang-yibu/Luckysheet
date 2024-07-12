@@ -1,3 +1,4 @@
+import method from "../global/method";
 import Store from "../store";
 import { getColumnAndRowSize } from "./updateCell";
 

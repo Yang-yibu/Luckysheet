@@ -168,8 +168,9 @@ export function formulaBarInitial(){
 
         let row_index = last["row_focus"], col_index = last["column_focus"];
 
-        luckysheetupdateCell(row_index, col_index, Store.flowdata);
-        
+        let canUpdate = luckysheetupdateCell(row_index, col_index, Store.flowdata);
+        if (!canUpdate) return;
+
         let cell = Store.flowdata[row_index][col_index];
         if(cell != null && cell.f != null){
             //单元格有计算

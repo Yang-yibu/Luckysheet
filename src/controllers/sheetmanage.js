@@ -1256,6 +1256,10 @@ const sheetmanage = {
         }
     },
     changeSheet: function(index, isPivotInitial, isNewSheet, isCopySheet) {
+         // 切换前：新 idx，旧 idx luckysheet.getSheet(i)
+         if (!method.createHookFunction("sheetActivateBefore", index, Store.currentSheetIndex)) {
+            return false;
+        }
         if (isEditMode()) {
             // alert("非编辑模式下不允许该操作！");
             return;

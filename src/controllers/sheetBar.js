@@ -154,10 +154,10 @@ let luckysheetsheetrightclick = function ($t, $cur, e) {
         $("#luckysheet-formula-functionrange .luckysheet-formula-functionrange-highlight").remove();
     }
 
+    if (sheetmanage.changeSheet($t.data("index")) === false) return;
     $("#luckysheet-sheet-area div.luckysheet-sheets-item").removeClass("luckysheet-sheets-item-active");
     $t.addClass("luckysheet-sheets-item-active");
     cleargridelement(e);
-    sheetmanage.changeSheet($t.data("index"));
 
     $("#luckysheet-sheet-list, #luckysheet-rightclick-sheet-menu").hide();
 

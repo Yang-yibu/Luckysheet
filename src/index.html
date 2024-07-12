@@ -157,8 +157,20 @@
 						cellUpdated: function (r, c, oldValue, newValue, isRefresh) {
 							// console.info('cellUpdated',r,c,oldValue, newValue, isRefresh)
 						},
+						sheetActivateBefore: function (index, oldIndex) {
+							const ns = luckysheet.getSheet({ index: index });
+							const os = luckysheet.getSheet({ index: oldIndex });
+							console.log('cur=>target: ', os.name, " => ",ns.name)
+							// TODO: 新增等有问题
+							if (ns.name.indexOf('Sheet') > -1) {
+								alert('不许切换到名称包含 Sheet 的页签')
+								return false
+							}
+						},
 						sheetActivate: function (index, isPivotInitial, isNewSheet) {
 							// console.info(index, isPivotInitial, isNewSheet)
+							const ns = luckysheet.getSheet({ index: index });
+							console.log('sheetChanged:', ns.name)
 						},
 						rangeSelect: function (index, sheet) {
 							// console.info(index, sheet)
@@ -188,6 +200,9 @@
 								alert('模拟第一行不能编辑')
 								return false
 							}
+						},
+						sheetShowBefore: function (arg) {
+							console.log('sheetShowBefore ', arg)
 						},
 						workbookCreateAfter: function (json) {
 							console.info('workbook create after!!!!====',json)

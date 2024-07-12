@@ -1397,7 +1397,7 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 
 - 类型：Function
 - 默认值：null
-- 作用：显示sheet页前触发
+- 作用：显示sheet页前触发（sheet 设置隐藏后，取消隐藏触发）
 - 参数：
 	- {Object} [sheet]: 将要显示的sheet页的配置
 

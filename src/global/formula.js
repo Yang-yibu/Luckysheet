@@ -1319,6 +1319,11 @@ const luckysheetformula = {
             return;
         }
 
+        // 表单输入前验证
+        if (!method.createHookFunction("inputedUpdateCellBefore", r, c, inputText)) {
+            _this.cancelNormalSelected();
+            return;
+        }
         //数据验证 输入数据无效时禁止输入
         if (dataVerificationCtrl.dataVerification != null) {
             let dvItem = dataVerificationCtrl.dataVerification[r + "_" + c];

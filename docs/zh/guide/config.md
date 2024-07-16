@@ -817,6 +817,17 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 	- {Array} [range]: 当前选区范围
 
 ------------
+### inputedUpdateCellBefore
+
+- 类型：Function
+- 默认值：null
+- 作用：更新这个单元格值之前触发，`return false` 则不执行后续的更新。在编辑状态下修改了单元格之后，数据校验之前，触发这个钩子。
+- 参数：
+	- {Number} [r]: 单元格所在行数
+	- {Number} [c]: 单元格所在列数
+	- {Object | String | Number} [value]: 用户输入的内容
+
+------------
 ### cellUpdateBefore
 
 - 类型：Function
@@ -1511,6 +1522,13 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 	- {Number} [i]: sheet页的`index`
 	- {String} [oldZoom]: 修改前当前sheet页缩放比例
 	- {String} [newZoom]: 修改后当前sheet页缩放比例
+
+### sheetActivateBefore
+
+- 类型：Function
+- 默认值：null
+- 作用：sheet切换前，返回 false，终止切换
+- 参数：
 
 ------------
 ### sheetActivate

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.15-1](///compare/v2.1.15-0...v2.1.15-1) (2024-07-17)
+
+
+### Bug Fixes
+
+* 初始化时，单元格通过钩子函数不让进入编辑状态时，点击 fx 取消公式输出，页面会报错 aa67455
+* **celldraw:** 单元格绘制 角标尺寸、绘制尺寸调整 - 提交了多余内容 cb355fa
+
 ### [2.1.15-0](///compare/v2.1.14...v2.1.15-0) (2024-07-03)
 
 

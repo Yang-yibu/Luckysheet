@@ -15,7 +15,12 @@ import { rowColumnOperationInitial } from "./controllers/rowColumnOperation";
 import { keyboardInitial } from "./controllers/keyboard";
 import { orderByInitial } from "./controllers/orderBy";
 import { initPlugins } from "./controllers/expendPlugins";
-import { getluckysheetfile, getluckysheet_select_save, getconfig, getConditionFormatCells } from "./methods/get";
+import {
+    getluckysheetfile,
+    getluckysheet_select_save,
+    getconfig,
+    getConditionFormatCells,
+} from "./methods/get";
 import { setluckysheet_select_save } from "./methods/set";
 import { luckysheetrefreshgrid, jfrefreshgrid } from "./global/refresh";
 import functionlist from "./function/functionlist";
@@ -34,7 +39,9 @@ import Mandarin from "flatpickr/dist/l10n/zh.js";
 import { initListener } from "./controllers/listener";
 import { hideloading, showloading } from "./global/loading.js";
 import { luckysheetextendData } from "./global/extend.js";
-import { initChat } from './demoData/chat.js'
+import { initChat } from "./demoData/chat.js";
+import { getColumnAndRowSize } from "./controllers/updateCell.js";
+import { isRealNum } from "./global/validate.js";
 
 let luckysheet = {};
 
@@ -91,12 +98,16 @@ luckysheet.create = function (setting) {
     luckysheetConfigsetting.showtoolbarConfig = extendsetting.showtoolbarConfig;
     luckysheetConfigsetting.showinfobar = extendsetting.showinfobar;
     luckysheetConfigsetting.showsheetbar = extendsetting.showsheetbar;
-    luckysheetConfigsetting.showsheetbarConfig = extendsetting.showsheetbarConfig;
+    luckysheetConfigsetting.showsheetbarConfig =
+        extendsetting.showsheetbarConfig;
     luckysheetConfigsetting.showstatisticBar = extendsetting.showstatisticBar;
-    luckysheetConfigsetting.showstatisticBarConfig = extendsetting.showstatisticBarConfig;
+    luckysheetConfigsetting.showstatisticBarConfig =
+        extendsetting.showstatisticBarConfig;
     luckysheetConfigsetting.sheetFormulaBar = extendsetting.sheetFormulaBar;
-    luckysheetConfigsetting.cellRightClickConfig = extendsetting.cellRightClickConfig;
-    luckysheetConfigsetting.sheetRightClickConfig = extendsetting.sheetRightClickConfig;
+    luckysheetConfigsetting.cellRightClickConfig =
+        extendsetting.cellRightClickConfig;
+    luckysheetConfigsetting.sheetRightClickConfig =
+        extendsetting.sheetRightClickConfig;
     luckysheetConfigsetting.pointEdit = extendsetting.pointEdit;
     luckysheetConfigsetting.pointEditUpdate = extendsetting.pointEditUpdate;
     luckysheetConfigsetting.pointEditZoom = extendsetting.pointEditZoom;
@@ -106,7 +117,8 @@ luckysheet.create = function (setting) {
     luckysheetConfigsetting.myFolderUrl = extendsetting.myFolderUrl;
     luckysheetConfigsetting.functionButton = extendsetting.functionButton;
 
-    luckysheetConfigsetting.showConfigWindowResize = extendsetting.showConfigWindowResize;
+    luckysheetConfigsetting.showConfigWindowResize =
+        extendsetting.showConfigWindowResize;
     luckysheetConfigsetting.enableAddRow = extendsetting.enableAddRow;
     luckysheetConfigsetting.enableAddBackTop = extendsetting.enableAddBackTop;
     luckysheetConfigsetting.addRowCount = extendsetting.addRowCount;
@@ -115,8 +127,10 @@ luckysheet.create = function (setting) {
 
     luckysheetConfigsetting.editMode = extendsetting.editMode;
     luckysheetConfigsetting.beforeCreateDom = extendsetting.beforeCreateDom;
-    luckysheetConfigsetting.workbookCreateBefore = extendsetting.workbookCreateBefore;
-    luckysheetConfigsetting.workbookCreateAfter = extendsetting.workbookCreateAfter;
+    luckysheetConfigsetting.workbookCreateBefore =
+        extendsetting.workbookCreateBefore;
+    luckysheetConfigsetting.workbookCreateAfter =
+        extendsetting.workbookCreateAfter;
     luckysheetConfigsetting.remoteFunction = extendsetting.remoteFunction;
     luckysheetConfigsetting.customFunctions = extendsetting.customFunctions;
 
@@ -125,7 +139,8 @@ luckysheet.create = function (setting) {
     luckysheetConfigsetting.plugins = extendsetting.plugins;
 
     luckysheetConfigsetting.rowHeaderWidth = extendsetting.rowHeaderWidth;
-    luckysheetConfigsetting.columnHeaderHeight = extendsetting.columnHeaderHeight;
+    luckysheetConfigsetting.columnHeaderHeight =
+        extendsetting.columnHeaderHeight;
 
     luckysheetConfigsetting.defaultColWidth = extendsetting.defaultColWidth;
     luckysheetConfigsetting.defaultRowHeight = extendsetting.defaultRowHeight;
@@ -138,12 +153,15 @@ luckysheet.create = function (setting) {
 
     luckysheetConfigsetting.initShowsheetbarConfig = false;
 
-    luckysheetConfigsetting.imageUpdateMethodConfig = extendsetting.imageUpdateMethodConfig;
+    luckysheetConfigsetting.imageUpdateMethodConfig =
+        extendsetting.imageUpdateMethodConfig;
 
     if (Store.lang === "zh") flatpickr.localize(Mandarin.zh);
 
     // Store the currently used plugins for monitoring asynchronous loading
-    Store.asyncLoad.push(...luckysheetConfigsetting.plugins.map(plugin => plugin.name));
+    Store.asyncLoad.push(
+        ...luckysheetConfigsetting.plugins.map(plugin => plugin.name)
+    );
 
     // Register plugins
     initPlugins(extendsetting.plugins, extendsetting);
@@ -182,7 +200,7 @@ luckysheet.create = function (setting) {
         });
     }
 
-    initChat()
+    initChat();
 };
 
 function initialWorkBook() {
@@ -253,5 +271,9 @@ luckysheet.locales = locales;
 
 // 获取条件格式渲染的单元格数量
 luckysheet.getConditionFormatCells = getConditionFormatCells;
+
+luckysheet.getColumnAndRowSize = getColumnAndRowSize;
+
+luckysheet.positionToCell = api.positionToCell;
 
 export { luckysheet };

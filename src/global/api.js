@@ -42,8 +42,39 @@ import dayjs from "dayjs";
 import {getRangetxt } from '../methods/get';
 import {luckysheetupdateCell} from '../controllers/updateCell';
 import luckysheetSearchReplace from "../controllers/searchReplace";
+import { setluckysheet_select_save } from "../methods/set";
 
 const IDCardReg = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
+
+/**
+ * 定位到指定单元格
+ * @param {Number} r 
+ * @param {Number} c 
+ * @param {Object} sheetOpt 可选参数
+ * @param {String} sheetOpt.index 工作表index
+ * @param {Number} sheetOpt.order 工作表order
+ * @param {String} sheetOpt.name 工作表name
+ * @returns 
+ */
+export function positionToCell(r, c, sheetOpt) {
+    if (!(isRealNum(r) && isRealNum(c))) return;
+
+    if (sheetOpt) {
+        setSheetActive(getSheet(sheetOpt).order);
+    }
+
+    scroll({ targetRow: r, targetColumn: c });
+    var range = { row: [r, r], column: [c, c] };
+    var mc = getCellValue(r, c, { type: "mc" });
+    if (mc) {
+        range = {
+            row: [mc.r, mc.r + (mc.rs - 1 >= 0 ? mc.rs - 1 : 0)],
+            column: [mc.c, mc.c + (mc.cs - 1 >= 0 ? mc.cs - 1 : 0)],
+        };
+    }
+    setluckysheet_select_save([range]);
+    selectHightlightShow();
+};
 
 /**
  * 获取单元格的值

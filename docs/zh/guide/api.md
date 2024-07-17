@@ -10,6 +10,31 @@ Luckysheet针对常用的数据操作需求，开放了主要功能的API，开�
 
 ## 单元格操作
 
+### positionToCell(row, column [,sheetOpt])<div id='positionToCell'></div>
+
+- **参数**
+	- {Number} [row]: 单元格所在行数；从0开始的整数，0表示第一行
+	- {Number} [column]: 单元格所在列数；从0开始的整数，0表示第一列
+    - {PlainObject} [sheetOpt]: 可选参数
+    	+ {Number} [index]: 工作表索引；默认值为当前工作表索引
+    	+ {Number} [order]: 工作表下标；默认值为当前工作表下标
+    	+ {Number} [name]: 工作表名称；默认值为当前工作表名称
+
+- **说明**
+
+	定位到指定单元格。
+
+- **示例**:
+
+	- 定位到当前 sheet 页的单元格
+		
+		`luckysheet.positionToCell(13, 5)`
+
+	- 定位到 Cell sheet 页的单元格
+		
+		`luckysheet.positionToCell(13, 5, { name:"Cell" })`
+
+
 ### getCellValue(row, column [,setting])<div id='getCellValue'></div>
  
 

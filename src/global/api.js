@@ -40,11 +40,37 @@ import dataVerificationCtrl from "../controllers/dataVerificationCtrl";
 import imageCtrl from '../controllers/imageCtrl';
 import dayjs from "dayjs";
 import {getRangetxt } from '../methods/get';
-import {luckysheetupdateCell} from '../controllers/updateCell';
+import {getColumnAndRowSize, luckysheetupdateCell} from '../controllers/updateCell';
 import luckysheetSearchReplace from "../controllers/searchReplace";
 import { setluckysheet_select_save } from "../methods/set";
 
 const IDCardReg = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
+
+/** 单元格提示 */
+export function cellTipShow (r, c, tipTxt) {
+    if (!tipTxt) return;
+
+    $("#luckysheet-dataVerification-showHintBox").hide();
+
+    const size = getColumnAndRowSize(r, c);
+
+    $("#luckysheet-dataVerification-showHintBox").html(tipTxt).show().css({
+        left: size.col_pre,
+        top: size.row,
+    });
+
+    var ins = {};
+    function destroy() {
+        $("#luckysheet-dataVerification-showHintBox").hide();
+    }
+    function update(_tipTxt) {
+        $("#luckysheet-dataVerification-showHintBox").html(_tipTxt);
+
+        return ins;
+    }
+    ins = { destroy, update };
+    return ins;
+};
 
 /**
  * 定位到指定单元格

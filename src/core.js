@@ -41,7 +41,6 @@ import { hideloading, showloading } from "./global/loading.js";
 import { luckysheetextendData } from "./global/extend.js";
 import { initChat } from "./demoData/chat.js";
 import { getColumnAndRowSize } from "./controllers/updateCell.js";
-import { isRealNum } from "./global/validate.js";
 
 let luckysheet = {};
 
@@ -275,5 +274,7 @@ luckysheet.getConditionFormatCells = getConditionFormatCells;
 luckysheet.getColumnAndRowSize = getColumnAndRowSize;
 
 luckysheet.positionToCell = api.positionToCell;
+
+luckysheet.cellTipShow = api.cellTipShow;
 
 export { luckysheet };

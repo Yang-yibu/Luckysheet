@@ -193,7 +193,7 @@ export default function luckysheetHandler() {
         let scrollNum = event.deltaFactor < 40 ? 1 : event.deltaFactor < 80 ? 2 : 3;
         if (event.shiftKey) {
             if (event.deltaY != 0) {
-                event.deltaX = event.deltaY
+                event.deltaX = -event.deltaY
                 event.deltaY = 0
             }
         }

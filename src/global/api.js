@@ -80,16 +80,26 @@ export function cellTipShow (r, c, tipTxt) {
  * @param {String} sheetOpt.index 工作表index
  * @param {Number} sheetOpt.order 工作表order
  * @param {String} sheetOpt.name 工作表name
+ * @param {boolean} sheetOpt.autoScroll 自动滚动到单元格，单元格距左上角距离
+ * @param {boolean} [sheetOpt.scrollOffset = 1] 滚动偏移，横纵默认 1 单元格
+ * @param {boolean} [sheetOpt.scrollOffsetY] 竖向偏移单元格
+ * @param {boolean} [sheetOpt.scrollOffsetMc = true] 处理合并单元格
  * @returns 
  */
 export function positionToCell(r, c, sheetOpt) {
+    let { 
+        autoScroll = true, 
+        scrollOffset = 1,
+        scrollOffsetY = 0,
+        scrollOffsetMc = true,
+        ..._sheetOpt
+    } = sheetOpt || {}
     if (!(isRealNum(r) && isRealNum(c))) return;
 
-    if (sheetOpt) {
-        setSheetActive(getSheet(sheetOpt).order);
+    if (Object.keys(_sheetOpt).length) {
+        setSheetActive(getSheet(_sheetOpt).order);
     }
 
-    scroll({ targetRow: r, targetColumn: c });
     var range = { row: [r, r], column: [c, c] };
     var mc = getCellValue(r, c, { type: "mc" });
     if (mc) {
@@ -100,6 +110,23 @@ export function positionToCell(r, c, sheetOpt) {
     }
     setluckysheet_select_save([range]);
     selectHightlightShow();
+
+    if (autoScroll) {
+        var _r = r;
+        var _c = c;
+        if (scrollOffsetMc) {
+            var tm = getCellValue(_r - scrollOffsetY, _c - scrollOffset, { type: 'mc' });
+            if (tm) {
+                _r = tm.r
+                _c = tm.c
+            }
+        } else {
+            _r = _r - scrollOffsetY
+            _c = _c - scrollOffset
+        }
+
+        scroll({ targetRow: _r, targetColumn: _c });
+    }
 };
 
 /**
@@ -5679,6 +5706,8 @@ export function refresh(options = {}) {
  * @param {Number} options.targetRow 纵向滚动到指定的行号
  * @param {Number} options.targetColumn 横向滚动到指定的列号
  * @param {Function} options.success 操作结束的回调函数
+ * @param {Number} options.offsetRow 偏移量
+ * @param {Number} [options.offsetCol] 偏移量，默认采用 offsetRow
  */
 export function scroll(options = {}){
     let {
@@ -5686,15 +5715,21 @@ export function scroll(options = {}){
         scrollTop,
         targetRow,
         targetColumn,
-        success
+        success,
+        offsetRow = 0,
+        offsetCol,
     } = {...options}
+
+    if (offsetCol === undefined) {
+        offsetCol = offsetRow
+    }
 
     if(scrollLeft != null){
         if(!isRealNum(scrollLeft)){
             return tooltip.info("The scrollLeft parameter is invalid.", "");
         }
 
-        $("#luckysheet-scrollbar-x").scrollLeft(scrollLeft);
+        $("#luckysheet-scrollbar-x").scrollLeft(scrollLeft - offsetCol);
     }
     else if(targetColumn != null){
         if(!isRealNum(targetColumn)){
@@ -5704,7 +5739,7 @@ export function scroll(options = {}){
         let col = Store.visibledatacolumn[targetColumn],
             col_pre = targetColumn <= 0 ? 0 : Store.visibledatacolumn[targetColumn - 1];
 
-        $("#luckysheet-scrollbar-x").scrollLeft(col_pre);
+        $("#luckysheet-scrollbar-x").scrollLeft(col_pre - offsetCol);
     }
 
 
@@ -5713,7 +5748,7 @@ export function scroll(options = {}){
             return tooltip.info("The scrollTop parameter is invalid.", "");
         }
 
-        $("#luckysheet-scrollbar-y").scrollTop(scrollTop);
+        $("#luckysheet-scrollbar-y").scrollTop(scrollTop - offsetRow);
     }
     else if(targetRow != null){
         if(!isRealNum(targetRow)){
@@ -5723,7 +5758,7 @@ export function scroll(options = {}){
         let row = Store.visibledatarow[targetRow],
             row_pre = targetRow <= 0 ? 0 : Store.visibledatarow[targetRow - 1];
 
-        $("#luckysheet-scrollbar-y").scrollTop(row_pre);
+        $("#luckysheet-scrollbar-y").scrollTop(row_pre - offsetRow);
     }
 
     if (success && typeof success === 'function') {

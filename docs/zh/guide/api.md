@@ -19,6 +19,10 @@ Luckysheet针对常用的数据操作需求，开放了主要功能的API，开�
     	+ {Number} [index]: 工作表索引；默认值为当前工作表索引
     	+ {Number} [order]: 工作表下标；默认值为当前工作表下标
     	+ {Number} [name]: 工作表名称；默认值为当前工作表名称
+    	+ {Boolean} [autoScroll = true]: 自动滚动到单元格
+    	+ {Number} [scrollOffset = 1]: 滚动偏移，目标单元格距左上角尺寸，默认横向偏移 1 单元格
+    	+ {Number} [scrollOffsetY]: 纵向偏移，默认无
+    	+ {Boolean} [scrollOffsetMc = true]: 偏移时，考虑单元格合并情况（合并单元格作为一个单元格）
 
 - **说明**
 
@@ -2425,6 +2429,8 @@ Luckysheet针对常用的数据操作需求，开放了主要功能的API，开�
 		+ {Number} [scrollTop]：纵向滚动值。默认为当前纵向滚动位置。
 		+ {Number} [targetRow]：纵向滚动到指定的行号。默认为当前纵向滚动位置。
 		+ {Number} [targetColumn]：横向滚动到指定的列号。默认为当前横向滚动位置。
+		+ {Number} [offsetRow]：纵向偏移量，目标单元格距顶部距离。
+		+ {Number} [offsetCol]：横向偏移量，目标单元格距左侧距离，默认采用 offsetRow 值。
 		+ {Function} [success]: 表格刷新成功后的回调函数
 
 - **说明**：

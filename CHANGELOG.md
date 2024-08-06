@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.15-2](///compare/v2.1.15-1...v2.1.15-2) (2024-08-06)
+
+
+### Bug Fixes
+
+* scroll 和 positionToCell 方法扩展参数 e896e5e
+
 ### [2.1.15-1](///compare/v2.1.15-0...v2.1.15-1) (2024-07-17)
 
 

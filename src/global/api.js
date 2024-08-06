@@ -114,11 +114,15 @@ export function positionToCell(r, c, sheetOpt) {
     if (autoScroll) {
         var _r = r;
         var _c = c;
+
         if (scrollOffsetMc) {
             var tm = getCellValue(_r - scrollOffsetY, _c - scrollOffset, { type: 'mc' });
             if (tm) {
                 _r = tm.r
                 _c = tm.c
+            } else {
+                _r = _r - scrollOffsetY
+                _c = _c - scrollOffset
             }
         } else {
             _r = _r - scrollOffsetY

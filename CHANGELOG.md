@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.15-3](///compare/v2.1.15-2...v2.1.15-3) (2024-08-06)
+
+
+### Bug Fixes
+
+* 修复 positionToCell 偏移后单元格不是合并单元格定位错误 bc53a66
+
 ### [2.1.15-2](///compare/v2.1.15-1...v2.1.15-2) (2024-08-06)
 
 

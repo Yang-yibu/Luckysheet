@@ -1718,6 +1718,8 @@ const luckysheetformula = {
             };
         }
 
+        // TODO: 加延时的原因，猜测这里只是处理好数据，报表将按照此数据进行更新
+        method.createHookFunction("cellUpdatedNoDelay", r, c, JSON.parse(oldValue), Store.flowdata[r][c], isRefresh);
         setTimeout(() => {
             // Hook function
             method.createHookFunction("cellUpdated", r, c, JSON.parse(oldValue), Store.flowdata[r][c], isRefresh);
